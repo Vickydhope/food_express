@@ -3,6 +3,7 @@ import 'package:food_express/view/app_scaffold.dart';
 import 'package:food_express/view/dashboard/dashboard_page.dart';
 import 'package:food_express/view/dish_details/dish_details_page.dart';
 import 'package:food_express/view/profile/profile_page.dart';
+import 'package:food_express/view/restaurant_page/restaurant_page.dart';
 import 'package:go_router/go_router.dart';
 
 var _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -27,8 +28,10 @@ final router = GoRouter(
             },
             routes: [
               GoRoute(
-                  path: 'product',
-                  builder: (context, state) =>  DishDetailsPage(),
+                path: 'restaurant',
+                builder: (context, state) => RestaurantPage(
+                  restaurantName: state.extra as String,
+                ),
               ),
             ]),
         GoRoute(

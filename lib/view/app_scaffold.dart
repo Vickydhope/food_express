@@ -15,11 +15,8 @@ class _AppScaffoldState extends State<AppScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       bottomNavigationBar: _buildBottomBar(),
-      body: Stack(
-        children: [const ScreenBackground(), widget.child],
-      ),
+      body: widget.child,
     );
   }
 
@@ -28,7 +25,6 @@ class _AppScaffoldState extends State<AppScaffold> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       showElevation: true,
       itemCornerRadius: 8,
-      backgroundColor: const Color(0xFF242323),
       curve: Curves.easeOut,
       containerHeight: 65,
       selectedIndex: _calculateSelectedIndex(context),
@@ -72,19 +68,19 @@ class _AppScaffoldState extends State<AppScaffold> {
   int _calculateSelectedIndex(BuildContext context) {
     final GoRouter route = GoRouter.of(context);
     final String location = route.location;
-    if (location.startsWith('/home')) {
+    if (location == '/home') {
       return 0;
     }
-    if (location.startsWith('/account')) {
+    if (location == '/account') {
       return 1;
     }
-    if (location.startsWith('/cart')) {
+    if (location == '/cart') {
       return 2;
     }
-    if (location.startsWith('/messages')) {
+    if (location == '/messages') {
       return 3;
     }
-    return 0;
+    return -1;
   }
 
   void onTap(int value) {

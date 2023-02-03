@@ -1,16 +1,17 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food_express/res/drawables.dart';
-import 'package:food_express/widgets/expandable_text.dart';
+import 'package:go_router/go_router.dart';
 
-class DishDetailsPage extends StatefulWidget {
-  DishDetailsPage({Key? key}) : super(key: key);
+import '../../widgets/widgets.dart';
 
-  @override
-  State<DishDetailsPage> createState() => _DishDetailsPageState();
-}
-
-class _DishDetailsPageState extends State<DishDetailsPage> {
+class RestaurantPage extends StatelessWidget {
+  RestaurantPage({Key? key, required this.restaurantName}) : super(key: key);
   var top = 0.0;
+  final String restaurantName;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +20,17 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              expandedHeight: 200,
+              expandedHeight: 250,
               pinned: true,
+              titleSpacing: 0,
               elevation: 0,
+              title: Text(
+                restaurantName,
+                style: Theme.of(context).textTheme.headline5,
+              ),
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   top = constraints.biggest.height;
-                  print(top);
                   return LayoutBuilder(builder:
                       (BuildContext context, BoxConstraints constraints) {
                     // print('constraints=' + constraints.toString());
@@ -33,33 +38,39 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
 
                     return FlexibleSpaceBar(
                         centerTitle: false,
-                        title: Padding(
-                          padding: const EdgeInsets.only(bottom: 31),
-                          child: AnimatedOpacity(
-                            duration: const Duration(milliseconds: 300),
-                            opacity: top ==
-                                    MediaQuery.of(context).padding.top +
-                                        kToolbarHeight +
-                                        31
-                                ? 1.0
-                                : 0.0,
-                            // opacity: 1.0,
-                            child: Text(
-                              "Onion Pizza",
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
+                        background: ShaderMask(
+                          shaderCallback: (rect) {
+                            return LinearGradient(
+                              end: Alignment.bottomCenter,
+                              begin: Alignment.topCenter,
+                              colors: [
+                                Theme.of(context)
+                                    .backgroundColor
+                                    .withOpacity(0.7),
+                                Theme.of(context)
+                                    .backgroundColor
+                                    .withOpacity(0.6),
+                                Theme.of(context)
+                                    .backgroundColor
+                                    .withOpacity(0.1),
+                                Colors.transparent,
+                                Colors.transparent,
+                              ],
+                            ).createShader(
+                                Rect.fromLTRB(0, 0, rect.width, rect.height));
+                          },
+                          blendMode: BlendMode.lighten,
+                          child: Image.asset(
+                            rest,
+                            alignment: Alignment.center,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        background: Image.asset(
-                          productImage,
-                          alignment: Alignment.topCenter,
-                          fit: BoxFit.cover,
                         ));
                   });
                 },
               ),
               bottom: PreferredSize(
-                  preferredSize: const Size(double.infinity, 31),
+                  preferredSize: const Size(double.infinity, 32),
                   child: Container(
                       decoration: BoxDecoration(
                         color: Theme.of(context).backgroundColor,
@@ -134,6 +145,10 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                     const SizedBox(
                       height: 16,
                     ),
+                    Text(
+                      restaurantName,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
                     const SizedBox(
                       height: 2,
                     ),
@@ -177,9 +192,32 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                     const SizedBox(
                       height: 8,
                     ),
-                    const ExpandableTextWidgets(
-                        text:
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Posuere lorem ipsum dolor sit amet consectetur. Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus at ultrices mi tempus imperdipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Posuere lorem ipsum dolor sit amet consectetur. Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Posuere lorem ipsum dolor sit amet consectetur. Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus at ultrices mi tempus imperdipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Posuere lorem ipsum dolor sit amet consectetur. Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor posuere.")
+                    Text(
+                      "Popular Restaurants",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    AlignedGridView.count(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      crossAxisCount: kIsWeb ? 6 : 2,
+                      itemCount: 24,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          context.go("/home/restaurant",
+                              extra: "Vegan Resto $index");
+                        },
+                        child: const RestaurantCard(
+                            name: "Vegan Resto",
+                            duration: "12 mins",
+                            imageUrl: rest),
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -6,3 +6,5 @@ const String imageRestaurant1 = "assets/images/restaurant1.png";
 const String imageRestaurant2 = "assets/images/restaurant2.png";
 const String profilePic = "assets/images/profile_pic.png";
 const String productImage = "assets/images/product.jpeg";
+const String imageDashboardBg = "assets/images/dashboard_bg.png";
+const String rest = "assets/images/rest.jpeg";

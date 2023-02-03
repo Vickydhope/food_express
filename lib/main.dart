@@ -18,9 +18,16 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       title: 'Food Express',
       debugShowCheckedModeBanner: false,
-      theme: customLightTheme().copyWith(
+      themeMode: ThemeMode.system,
+      darkTheme: customDarkTheme().copyWith(
           textTheme:
-              GoogleFonts.interTextTheme(customLightTheme().textTheme)),
+              GoogleFonts.comfortaaTextTheme(customDarkTheme().textTheme)),
+      theme: customLightTheme().copyWith(
+
+        textTheme: GoogleFonts.comfortaaTextTheme(customLightTheme().textTheme),
+        brightness: Brightness.light,
+
+      ),
     );
   }
 }

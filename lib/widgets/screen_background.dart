@@ -12,7 +12,7 @@ class ScreenBackground extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.transparent,
+            Colors.white,
             Colors.black,
             Colors.black,
             Colors.black,
@@ -20,7 +20,7 @@ class ScreenBackground extends StatelessWidget {
           ],
         ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
       },
-      blendMode: BlendMode.multiply,
+      blendMode: BlendMode.dstOut,
       child: Image.asset(
         width: double.infinity,
         height: double.infinity,

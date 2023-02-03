@@ -120,18 +120,21 @@ class _ItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Badge(
-                  showBadge: item.showBadge,
-                  badgeAnimation: const BadgeAnimation.fade(),
-                  stackFit: StackFit.passthrough,
-                  child: IconTheme(
-                    data: IconThemeData(
-                      size: iconSize,
-                      color: isSelected
-                          ? item.activeColor.withOpacity(1)
-                          : item.inactiveColor ?? item.activeColor,
+                Padding(
+                  padding: const EdgeInsets.only(top : 2.0),
+                  child: Badge(
+                    showBadge: item.showBadge,
+                    badgeAnimation: const BadgeAnimation.fade(),
+                    stackFit: StackFit.passthrough,
+                    child: IconTheme(
+                      data: IconThemeData(
+                        size: iconSize,
+                        color: isSelected
+                            ? item.activeColor.withOpacity(1)
+                            : item.inactiveColor ?? item.activeColor,
+                      ),
+                      child: item.icon,
                     ),
-                    child: item.icon,
                   ),
                 ),
                 if (isSelected)
