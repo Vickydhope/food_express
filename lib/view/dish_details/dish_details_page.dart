@@ -3,7 +3,9 @@ import 'package:food_express/res/drawables.dart';
 import 'package:food_express/widgets/expandable_text.dart';
 
 class DishDetailsPage extends StatefulWidget {
-  DishDetailsPage({Key? key}) : super(key: key);
+  final String dishName;
+
+  DishDetailsPage({Key? key, required this.dishName}) : super(key: key);
 
   @override
   State<DishDetailsPage> createState() => _DishDetailsPageState();
@@ -25,7 +27,6 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   top = constraints.biggest.height;
-                  print(top);
                   return LayoutBuilder(builder:
                       (BuildContext context, BoxConstraints constraints) {
                     // print('constraints=' + constraints.toString());
@@ -45,7 +46,7 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                                 : 0.0,
                             // opacity: 1.0,
                             child: Text(
-                              "Onion Pizza",
+                              widget.dishName,
                               style: Theme.of(context).textTheme.headline5,
                             ),
                           ),

@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:food_express/res/drawables.dart';
+import 'package:food_express/widgets/product_card.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  var top = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -10,22 +18,72 @@ class ProfilePage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            centerTitle: false,
-            title: const Text(
-              "Account Details",
-              style: TextStyle(color: Colors.redAccent),
-            ),
-            expandedHeight: MediaQuery.of(context).size.height * 0.25,
             pinned: true,
+            titleSpacing: 0,
             elevation: 0,
-            flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-              profilePic,
-              alignment: Alignment.topCenter,
-              fit: BoxFit.cover,
-            )),
+            expandedHeight: MediaQuery.of(context).size.shortestSide * 0.8,
+            flexibleSpace: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                // print('constraints=' + constraints.toString());
+                top = constraints.biggest.height;
+
+                return FlexibleSpaceBar(
+                    expandedTitleScale: 1.0,
+                    titlePadding: const EdgeInsets.only(left: 16, bottom: 31),
+                    centerTitle: false,
+                    title: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 300),
+                      opacity: top ==
+                              MediaQuery.of(context).padding.top +
+                                  kToolbarHeight +
+                                  31
+                          ? 1.0
+                          : 0.0,
+                      // opacity: 1.0,
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            backgroundImage: AssetImage(profilePic),
+                            radius: kToolbarHeight / 2.5,
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Brooklyn Simmons",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    background: ShaderMask(
+                      shaderCallback: (rect) {
+                        return LinearGradient(
+                          end: Alignment.bottomCenter,
+                          begin: Alignment.topCenter,
+                          colors: [
+                            Theme.of(context).backgroundColor.withOpacity(0.7),
+                            Theme.of(context).backgroundColor.withOpacity(0.6),
+                            Theme.of(context).backgroundColor.withOpacity(0.1),
+                            Colors.transparent,
+                            Colors.transparent,
+                          ],
+                        ).createShader(
+                            Rect.fromLTRB(0, 0, rect.width, rect.height));
+                      },
+                      blendMode: BlendMode.lighten,
+                      child: Image.asset(
+                        profilePic,
+                        alignment: Alignment.center,
+                        fit: BoxFit.cover,
+                      ),
+                    ));
+              },
+            ),
             bottom: PreferredSize(
-                preferredSize: const Size(double.infinity, 0),
+                preferredSize: const Size(double.infinity, 31),
                 child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).backgroundColor,
@@ -56,92 +114,67 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
+                            horizontal: 24, vertical: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            color: Colors.redAccent.withOpacity(0.4)),
+                            color: Colors.amber.withOpacity(0.4)),
                         child: const Text(
                           "Popular",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.redAccent),
+                              color: Colors.amber),
                         ),
                       ),
-                      Expanded(child: Container()),
-                      TextButton(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.all(12),
-                            backgroundColor: Colors.redAccent.withOpacity(0.4),
-                            shape: const CircleBorder(),
-                          ),
-                          onPressed: () {},
-                          child: const Icon(
-                            Icons.location_on_rounded,
-                            size: 26,
-                            color: Colors.redAccent,
-                          )),
-                      TextButton(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.all(12),
-                            backgroundColor: Colors.redAccent.withOpacity(0.4),
-                            shape: const CircleBorder(),
-                          ),
-                          onPressed: () {},
-                          child: const Icon(
-                            Icons.favorite_rounded,
-                            size: 26,
-                            color: Colors.redAccent,
-                          )),
                     ],
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  Text(
-                    "Onion Pizza",
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.star_half_outlined,
-                        size: 26,
-                        color: Colors.redAccent.shade400,
+                      Expanded(
+                        child: Text(
+                          "Brooklyn Simmons",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4
+                              ?.copyWith(fontSize: 24),
+                        ),
                       ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "4.8 Rating",
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1
-                            ?.copyWith(color: Colors.grey.shade600),
-                      ),
-                      const SizedBox(
-                        width: 24,
-                      ),
-                      Icon(
-                        Icons.shopping_bag_rounded,
-                        size: 26,
-                        color: Colors.redAccent.shade400,
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "4.8 Rating",
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1
-                            ?.copyWith(color: Colors.grey.shade600),
-                      ),
+                      IconButton(
+                          splashRadius: 24,
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.redAccent,
+                          ))
                     ],
                   ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    "brooklyn.simmons@gmail.com",
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1
+                        ?.copyWith(color: Colors.grey.shade400),
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Text(
+                    "Favorite",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ProductCard(),
                   const Text(
                     "Lorem Ipsum delor dummmy text Quick brown fox jumps over the lazy dog",
                     style: TextStyle(fontSize: 100),

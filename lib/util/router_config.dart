@@ -22,35 +22,38 @@ final router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-            path: '/home',
-            pageBuilder: (context, state) {
-              return CustomTransitionPage(
-                  key: state.pageKey,
-                  child: const DashboardPage(),
-                  transitionDuration: const Duration(milliseconds: 150),
-                  transitionsBuilder: (BuildContext context,
-                      Animation<double> animation,
-                      Animation<double> secondaryAnimation,
-                      Widget child) {
-                    return FadeTransition(
-                        opacity: CurveTween(curve: Curves.easeInCubic)
-                            .animate(animation),
-                        child: child);
-                  });
-            },
-            routes: [
-              GoRoute(
-                  path: 'restaurant',
-                  builder: (context, state) => RestaurantPage(
-                        restaurantName: state.extra as String,
-                      ),
-                  routes: [
-                    GoRoute(
-                      path: 'product',
-                      builder: (context, state) => DishDetailsPage(),
+          path: '/home',
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+                key: state.pageKey,
+                child: const DashboardPage(),
+                transitionDuration: const Duration(milliseconds: 150),
+                transitionsBuilder: (BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child) {
+                  return FadeTransition(
+                      opacity: CurveTween(curve: Curves.easeInCubic)
+                          .animate(animation),
+                      child: child);
+                });
+          },
+          routes: [
+            GoRoute(
+                path: 'restaurant',
+                builder: (context, state) => RestaurantPage(
+                      restaurantName: state.extra as String,
                     ),
-                  ]),
-            ]),
+                routes: [
+                  GoRoute(
+                    path: 'product',
+                    builder: (context, state) => DishDetailsPage(
+                      dishName: state.extra as String,
+                    ),
+                  ),
+                ]),
+          ],
+        ),
         GoRoute(
           path: '/account',
           pageBuilder: (context, state) {
