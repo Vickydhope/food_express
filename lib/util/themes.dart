@@ -17,6 +17,7 @@ MaterialColor primarySwatch = const MaterialColor(0xFFFF5252, primaryColor);
 ThemeData customLightTheme() {
   final ThemeData lightTheme = ThemeData(primarySwatch: primarySwatch);
   return lightTheme.copyWith(
+    splashColor: Colors.redAccent,
     platform: TargetPlatform.iOS,
     textTheme: lightTheme.textTheme.apply(
       bodyColor: Colors.black,
@@ -99,7 +100,10 @@ ThemeData customLightTheme() {
         horizontal: 16,
       ),
       fillColor: Colors.grey.withOpacity(0.3),
-      focusedBorder: inputBorder(),
+      focusedBorder: inputBorder().copyWith(
+          borderSide: BorderSide(
+        color: Colors.redAccent.withOpacity(0.1),
+      )),
       enabledBorder: inputBorder(),
       border: inputBorder(),
     ),
@@ -115,6 +119,7 @@ ThemeData customLightTheme() {
 ThemeData customDarkTheme() {
   final ThemeData darkTheme = ThemeData(primarySwatch: primarySwatch);
   return darkTheme.copyWith(
+    splashColor: Colors.redAccent,
     platform: TargetPlatform.iOS,
     textTheme: darkTheme.textTheme.apply(
       bodyColor: Colors.white,
@@ -198,7 +203,10 @@ ThemeData customDarkTheme() {
         horizontal: 16,
       ),
       fillColor: Colors.grey.withOpacity(0.3),
-      focusedBorder: inputBorder(),
+      focusedBorder: inputBorder().copyWith(
+          borderSide: BorderSide(
+        color: Colors.redAccent.withOpacity(0.3),
+      )),
       enabledBorder: inputBorder(),
       border: inputBorder(),
     ),
@@ -211,7 +219,7 @@ ThemeData customDarkTheme() {
   );
 }
 
-BorderSide inputBorderSide = BorderSide(color: Colors.grey.withOpacity(0.3));
+BorderSide inputBorderSide = BorderSide(color: Colors.transparent);
 BorderRadius inputBorderRadius = BorderRadius.circular(10);
 
 OutlineInputBorder inputBorder() {

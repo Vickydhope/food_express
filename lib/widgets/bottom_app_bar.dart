@@ -9,7 +9,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
     this.iconSize = 24,
     this.backgroundColor,
     this.itemCornerRadius = 50,
-    this.containerHeight = 56,
+    this.containerHeight,
     this.animationDuration = const Duration(milliseconds: 270),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     required this.items,
@@ -27,7 +27,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
   final ValueChanged<int> onItemSelected;
   final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
-  final double containerHeight;
+  final double? containerHeight;
   final Curve curve;
 
   @override
@@ -100,7 +100,7 @@ class _ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        width: isSelected ? 130 : 50,
+        width: isSelected ? 120 : 55,
         duration: animationDuration,
         curve: curve,
         decoration: BoxDecoration(
@@ -113,16 +113,18 @@ class _ItemWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
           child: Container(
-            width: isSelected ? 130 : 55,
+            width: isSelected ? 120 : 55,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top : 2.0),
+                  padding: const EdgeInsets.only(top: 4.0),
                   child: Badge(
+                    badgeStyle: BadgeStyle(badgeColor: Colors.green.shade800),
+                    position: BadgePosition.topEnd(top: -5, end: -4),
                     showBadge: item.showBadge,
                     badgeAnimation: const BadgeAnimation.fade(),
                     stackFit: StackFit.passthrough,

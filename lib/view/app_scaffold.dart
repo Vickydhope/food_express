@@ -26,7 +26,6 @@ class _AppScaffoldState extends State<AppScaffold> {
       showElevation: true,
       itemCornerRadius: 8,
       curve: Curves.easeOut,
-      containerHeight: 65,
       selectedIndex: _calculateSelectedIndex(context),
       onItemSelected: onTap,
       items: <BottomNavyBarItem>[

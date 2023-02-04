@@ -102,12 +102,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         Expanded(
                           flex: 25,
                           child: Text(
-                            "Find Your\nFavorite Food",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline1
-                                ?.copyWith(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
+                            "Order Your Favorite Food.",
+                            style:
+                                Theme.of(context).textTheme.headline1?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
                           ),
                         ),
                       ],
@@ -131,15 +131,21 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
                             color: Colors.grey.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.filter_list_alt,
-                                size: 24,
-                              )),
+                          child: Material(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            clipBehavior: Clip.hardEdge,
+                            color: Colors.transparent,
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.filter_list_alt,
+                                  size: 24,
+                                )),
+                          ),
                         ),
                       ],
                     ),
@@ -174,8 +180,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
-                      context.go("/home/restaurant",
-                          extra: "Vegan Resto");
+                      context.go("/home/restaurant", extra: "Vegan Resto");
                     },
                     child: const RestaurantCard(
                         name: "Vegan Resto",
