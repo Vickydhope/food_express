@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food_express/res/drawables.dart';
 import 'package:food_express/widgets/product_card.dart';
+import 'package:food_express/widgets/sharer_mask_wrapper_widget.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../widgets/widgets.dart';
@@ -57,34 +58,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
                           ),
                         ),
                       ),
-                      background: ShaderMask(
-                        shaderCallback: (rect) {
-                          return LinearGradient(
-                            end: Alignment.bottomCenter,
-                            begin: Alignment.topCenter,
-                            colors: [
-                              Theme.of(context)
-                                  .backgroundColor
-                                  .withOpacity(0.7),
-                              Theme.of(context)
-                                  .backgroundColor
-                                  .withOpacity(0.6),
-                              Theme.of(context)
-                                  .backgroundColor
-                                  .withOpacity(0.1),
-                              Colors.transparent,
-                              Colors.transparent,
-                            ],
-                          ).createShader(
-                              Rect.fromLTRB(0, 0, rect.width, rect.height));
-                        },
-                        blendMode: BlendMode.lighten,
-                        child: Image.asset(
-                          rest,
-                          alignment: Alignment.center,
-                          fit: BoxFit.cover,
-                        ),
-                      ));
+                      background: SharedMaskWrapperWidget(
+                          child: Image.asset(
+                        rest,
+                        alignment: Alignment.center,
+                        fit: BoxFit.cover,
+                      )));
                 },
               ),
               bottom: PreferredSize(
@@ -221,17 +200,14 @@ class _RestaurantPageState extends State<RestaurantPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       crossAxisCount: kIsWeb ? 4 : 1,
                       itemCount: Random().nextInt(10),
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 4,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          GoRouter.of(context).push("/home/restaurant/product",
-                              extra: generateRandomString(10));
-                        },
-                        child: const ProductCard(),
-                      ),
+                      itemBuilder: (context, index) => ProductCard(onTap: () {
+                        GoRouter.of(context).push("/home/restaurant/product",
+                            extra: generateRandomString(10));
+                      }),
                     ),
                   ],
                 ),

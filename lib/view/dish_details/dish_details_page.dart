@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_express/res/drawables.dart';
 import 'package:food_express/widgets/expandable_text.dart';
+import 'package:food_express/widgets/sharer_mask_wrapper_widget.dart';
 
 class DishDetailsPage extends StatefulWidget {
   final String dishName;
@@ -21,7 +22,7 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              expandedHeight: 200,
+              expandedHeight: MediaQuery.of(context).size.shortestSide * 0.6,
               pinned: true,
               elevation: 0,
               flexibleSpace: LayoutBuilder(
@@ -51,10 +52,12 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                             ),
                           ),
                         ),
-                        background: Image.asset(
-                          productImage,
-                          alignment: Alignment.topCenter,
-                          fit: BoxFit.cover,
+                        background: SharedMaskWrapperWidget(
+                          child: Image.asset(
+                            productImage,
+                            alignment: Alignment.topCenter,
+                            fit: BoxFit.cover,
+                          ),
                         ));
                   });
                 },
@@ -94,11 +97,11 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                               horizontal: 24, vertical: 12),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: Colors.redAccent.withOpacity(0.4)),
+                              color: Colors.redAccent.withOpacity(0.3)),
                           child: const Text(
                             "Popular",
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.redAccent),
                           ),
@@ -106,34 +109,58 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                         Expanded(child: Container()),
                         TextButton(
                             style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(10),
                               backgroundColor:
-                                  Colors.redAccent.withOpacity(0.4),
+                                  Colors.redAccent.withOpacity(0.3),
                               shape: const CircleBorder(),
                             ),
                             onPressed: () {},
                             child: const Icon(
                               Icons.location_on_rounded,
-                              size: 26,
                               color: Colors.redAccent,
                             )),
                         TextButton(
                             style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(10),
                               backgroundColor:
-                                  Colors.redAccent.withOpacity(0.4),
+                                  Colors.redAccent.withOpacity(0.3),
                               shape: const CircleBorder(),
                             ),
                             onPressed: () {},
                             child: const Icon(
                               Icons.favorite_rounded,
-                              size: 26,
                               color: Colors.redAccent,
+                            )),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 15),
+                              backgroundColor:
+                                  Colors.redAccent.withOpacity(0.3),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(1000)),
+                            ),
+                            onPressed: () {},
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.shopping_cart_sharp,
+                                  color: Colors.redAccent,
+                                ),
+                                Text("Add"),
+                              ],
                             )),
                       ],
                     ),
                     const SizedBox(
                       height: 16,
+                    ),
+                    Text(
+                      widget.dishName,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          ?.copyWith(fontSize: 24),
                     ),
                     const SizedBox(
                       height: 2,
@@ -167,7 +194,7 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                           width: 4,
                         ),
                         Text(
-                          "4.8 Rating",
+                          "1k+ Orders",
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1

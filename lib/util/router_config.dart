@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_express/view/app_scaffold.dart';
+import 'package:food_express/view/cart/cart_page.dart';
 import 'package:food_express/view/dashboard/dashboard_page.dart';
 import 'package:food_express/view/dish_details/dish_details_page.dart';
+import 'package:food_express/view/frosted/frosted_page.dart';
 import 'package:food_express/view/messages/messages_page.dart';
 import 'package:food_express/view/profile/profile_page.dart';
-import 'package:food_express/view/restaurant_page/restaurant_page.dart';
+import 'package:food_express/view/restaurant/restaurant_page.dart';
 import 'package:go_router/go_router.dart';
 
 var _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -77,7 +79,7 @@ final router = GoRouter(
           pageBuilder: (context, state) {
             return CustomTransitionPage(
                 key: state.pageKey,
-                child: const DashboardPage(),
+                child: const CartPage(),
                 transitionDuration: const Duration(milliseconds: 150),
                 transitionsBuilder: (BuildContext context,
                     Animation<double> animation,

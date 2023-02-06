@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_express/res/drawables.dart';
+import 'package:food_express/widgets/fullscreen_image_wrapper_widget.dart';
 
 class MessagesPage extends StatelessWidget {
   const MessagesPage({Key? key}) : super(key: key);
@@ -25,7 +26,8 @@ class MessagesPage extends StatelessWidget {
                       ? productImage
                       : index % 2 == 0
                           ? profilePic
-                          : null),
+                          : null,
+                  context: context),
               itemCount: 10,
             ),
           ),
@@ -67,6 +69,7 @@ class MessagesPage extends StatelessWidget {
   _getMessageView(
     bool isReceiverMessage, {
     String? image,
+    required BuildContext context,
   }) {
     return Container(
       padding: const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
@@ -103,7 +106,9 @@ class MessagesPage extends StatelessWidget {
                         if (image != null) ...{
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(image),
+                            child: ImageFullScreenWrapperWidget(
+                              child: Image.asset(image),
+                            ),
                           ),
                           const SizedBox(
                             height: 12,
