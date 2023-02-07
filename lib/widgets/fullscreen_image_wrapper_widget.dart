@@ -5,12 +5,12 @@ import 'package:flutter/services.dart';
 
 class ImageFullScreenWrapperWidget extends StatelessWidget {
   final Image child;
-  final bool dark;
+  final bool? dark;
 
   const ImageFullScreenWrapperWidget({
     super.key,
     required this.child,
-    this.dark = true,
+    this.dark,
   });
 
   @override
@@ -24,15 +24,16 @@ class ImageFullScreenWrapperWidget extends StatelessWidget {
             reverseTransitionDuration: const Duration(milliseconds: 100),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) =>
-                    ScaleTransition(
-              scale: animation,
-              child: child,
-            ),
+                ScaleTransition(
+                  scale: animation,
+                  child: child,
+                ),
             opaque: false,
-            barrierColor: dark ? Colors.black : Colors.white,
             pageBuilder: (BuildContext context, _, __) {
               return FullScreenPage(
-                dark: dark,
+                dark: dark ?? MediaQuery
+                    .of(context)
+                    .platformBrightness == Brightness.dark,
                 child: child,
               );
             },
@@ -45,7 +46,8 @@ class ImageFullScreenWrapperWidget extends StatelessWidget {
 }
 
 class FullScreenPage extends StatefulWidget {
-  const FullScreenPage({super.key,
+  const FullScreenPage({
+    super.key,
     required this.child,
     required this.dark,
   });
@@ -79,14 +81,15 @@ class _FullScreenPageState extends State<FullScreenPage> {
   void dispose() {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        // Restore your settings here...
-        ));
+      // Restore your settings here...
+    ));
     super.dispose();
   }
 
   var initialControllerValue;
 
   var controller = TransformationController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,9 +112,8 @@ class _FullScreenPageState extends State<FullScreenPage> {
                   panEnabled: false,
                   maxScale: 4,
                   constrained: true,
-
                   onInteractionStart: (details) {
-                    initialControllerValue= controller.value;
+                    initialControllerValue = controller.value;
                   },
                   onInteractionEnd: (details) {
                     controller.value = initialControllerValue;

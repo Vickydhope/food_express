@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_express/res/drawables.dart';
-import 'package:food_express/widgets/fullscreen_image_wrapper_widget.dart';
+import 'package:food_express/widgets/widgets.dart';
 
 class MessagesPage extends StatelessWidget {
   const MessagesPage({Key? key}) : super(key: key);
@@ -9,10 +9,8 @@ class MessagesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
         title: const Text(
           "Messages",
-          style: TextStyle(color: Colors.white),
         ),
       ),
       body: SafeArea(

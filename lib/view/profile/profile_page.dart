@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_express/res/drawables.dart';
 import 'package:food_express/view/restaurant/restaurant_page.dart';
-import 'package:food_express/widgets/product_card.dart';
-import 'package:food_express/widgets/sharer_mask_wrapper_widget.dart';
+import 'package:food_express/widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -173,7 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                   const Text(
-                    "Lorem Ipsum delor dummmy text Quick brown fox jumps over the lazy dog",
+                    "Quick brown fox jumps over the lazy dog",
                     style: TextStyle(fontSize: 100),
                   )
                 ],

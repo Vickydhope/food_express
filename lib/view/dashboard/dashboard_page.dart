@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food_express/res/drawables.dart';
-import 'package:food_express/widgets/restaurant_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -83,73 +82,81 @@ class _DashboardPageState extends State<DashboardPage> {
             elevation: 0,
             bottom: PreferredSize(
               preferredSize: const Size(double.infinity, 130),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
+              child: FrostedBackgroundWidget(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
                 ),
-                padding: const EdgeInsets.only(
-                    left: 16, top: 16, bottom: 10, right: 16),
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 25,
-                          child: Text(
-                            "Order Your Favorite Food.",
-                            style:
-                                Theme.of(context).textTheme.headline1?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                          ),
-                        ),
-                      ],
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
                     ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                                hintText: "what do you want to order?",
-                                prefixIcon: Icon(
-                                  Icons.search_rounded,
-                                )),
+                  ),
+                  padding: const EdgeInsets.only(
+                      left: 16, top: 16, bottom: 10, right: 16),
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 25,
+                            child: Text(
+                              "Order Your Favorite Food.",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline1
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                color: Colors.grey.shade600
+                                  ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(10),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                  hintText: "what do you want to order?",
+                                  prefixIcon: Icon(
+                                    Icons.search_rounded,
+                                  )),
+                            ),
                           ),
-                          child: Material(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            clipBehavior: Clip.hardEdge,
-                            color: Colors.transparent,
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.filter_list_alt,
-                                  size: 24,
-                                )),
+                          const SizedBox(
+                            width: 16,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Material(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              clipBehavior: Clip.hardEdge,
+                              color: Colors.transparent,
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.filter_list_alt,
+                                    size: 24,
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

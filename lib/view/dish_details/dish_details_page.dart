@@ -6,7 +6,7 @@ import 'package:food_express/widgets/sharer_mask_wrapper_widget.dart';
 class DishDetailsPage extends StatefulWidget {
   final String dishName;
 
-  DishDetailsPage({Key? key, required this.dishName}) : super(key: key);
+  const DishDetailsPage({Key? key, required this.dishName}) : super(key: key);
 
   @override
   State<DishDetailsPage> createState() => _DishDetailsPageState();
@@ -106,24 +106,13 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                                 color: Colors.redAccent),
                           ),
                         ),
+
                         Expanded(child: Container()),
                         TextButton(
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.all(10),
                               backgroundColor:
-                                  Colors.redAccent.withOpacity(0.3),
-                              shape: const CircleBorder(),
-                            ),
-                            onPressed: () {},
-                            child: const Icon(
-                              Icons.location_on_rounded,
-                              color: Colors.redAccent,
-                            )),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(10),
-                              backgroundColor:
-                                  Colors.redAccent.withOpacity(0.3),
+                              Colors.redAccent.withOpacity(0.3),
                               shape: const CircleBorder(),
                             ),
                             onPressed: () {},
@@ -143,11 +132,14 @@ class _DishDetailsPageState extends State<DishDetailsPage> {
                             onPressed: () {},
                             child: Row(
                               children: const [
+                                Text("Add"),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 Icon(
                                   Icons.shopping_cart_sharp,
                                   color: Colors.redAccent,
                                 ),
-                                Text("Add"),
                               ],
                             )),
                       ],

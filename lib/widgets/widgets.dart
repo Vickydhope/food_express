@@ -3,3 +3,7 @@ export 'screen_background.dart';
 export 'expandable_text.dart';
 export 'small_text.dart';
 export 'restaurant_card.dart';
+export 'fullscreen_image_wrapper_widget.dart';
+export 'product_card.dart';
+export 'sharer_mask_wrapper_widget.dart';
+export 'frosted_background_widget.dart';

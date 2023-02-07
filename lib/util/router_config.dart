@@ -3,7 +3,7 @@ import 'package:food_express/view/app_scaffold.dart';
 import 'package:food_express/view/cart/cart_page.dart';
 import 'package:food_express/view/dashboard/dashboard_page.dart';
 import 'package:food_express/view/dish_details/dish_details_page.dart';
-import 'package:food_express/view/frosted/frosted_page.dart';
+import 'package:food_express/widgets/frosted_background_widget.dart';
 import 'package:food_express/view/messages/messages_page.dart';
 import 'package:food_express/view/profile/profile_page.dart';
 import 'package:food_express/view/restaurant/restaurant_page.dart';

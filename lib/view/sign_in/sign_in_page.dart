@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:food_express/res/drawables.dart';
 import 'package:food_express/view/dashboard/dashboard_page.dart';
 import 'package:food_express/view/sign_up/sign_up_page.dart';
-import 'package:food_express/widgets/screen_background.dart';
+import 'package:food_express/widgets/widgets.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);

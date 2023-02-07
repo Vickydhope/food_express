@@ -86,7 +86,7 @@ ThemeData customLightTheme() {
     errorColor: Colors.redAccent,
     appBarTheme: lightTheme.appBarTheme.copyWith(
       toolbarHeight: kToolbarHeight + 1.25,
-      foregroundColor: Colors.white,
+      foregroundColor: Colors.black,
       backgroundColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.grey.shade800),
       titleTextStyle:
@@ -137,7 +137,8 @@ ThemeData customDarkTheme() {
         TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
       },
     ),
-    drawerTheme: darkTheme.drawerTheme.copyWith(backgroundColor: Colors.white),
+    drawerTheme:
+        darkTheme.drawerTheme.copyWith(backgroundColor: Colors.grey.shade800),
     cardTheme: darkTheme.cardTheme.copyWith(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -188,13 +189,12 @@ ThemeData customDarkTheme() {
     errorColor: Colors.redAccent,
     appBarTheme: darkTheme.appBarTheme.copyWith(
       toolbarHeight: kToolbarHeight + 1.25,
-      foregroundColor: Colors.black,
-      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade900,
       iconTheme: const IconThemeData(color: Colors.white),
-      titleTextStyle:
-          darkTheme.appBarTheme.titleTextStyle?.copyWith(color: Colors.white),
+      titleTextStyle: darkTheme.appBarTheme.titleTextStyle,
     ),
-    bottomAppBarColor: Colors.black,
+    bottomAppBarColor: Colors.grey.shade900,
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: const Color(0xFF807A6B),
       hintStyle: const TextStyle(color: Colors.grey),
